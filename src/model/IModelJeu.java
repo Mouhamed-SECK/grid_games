@@ -76,7 +76,7 @@ public interface IModelJeu {
     public Player getCurrentPlayer();
 
 
-       /**
+    /**
      * Récupère le nombre de lignes dans la grille.
      *
      * @return Le nombre de lignes.
@@ -84,11 +84,20 @@ public interface IModelJeu {
     public int getRow();
 
 
-       /**
+    /**
      * Récupère le nombre de colonnes dans la grille.
      *
      * @return Le nombre de colonnes .
      */
     public int getCol();
+
+    /**
+     * Trouve la première ligne vide dans une colonne spécifiée.
+     *
+     * @param col La colonne où rechercher la première ligne vide.
+     * @return L'index de la première ligne vide dans la colonne.
+     * @throws IllegalArgumentException Si la colonne est pleine.
+     */
+    int trouverEmptyRow(int col);
 
 }

@@ -1,6 +1,8 @@
 package controller;
 
 import model.IModelJeu;
+import model.ModelMorpion;
+import model.ModelPuissance4;
 import model.Piece;
 import view.IView;
 
@@ -29,7 +31,7 @@ public class GameController implements IGameController {
     public GameController() {
     }
 
-    @Override
+/*     @Override
     public void gererSaisie() {
         try {
             // Saisir le coup depuis la vue
@@ -57,7 +59,50 @@ public class GameController implements IGameController {
             // Afficher une erreur si le coup n'est pas valide
             this.view.afficherErrorCoup();
         }
+    } */
+
+    public void gererSaisie() {
+        try {
+            // Saisir le coup depuis la vue
+            int coup = this.view.saisirCoup();
+
+            if (model instanceof ModelMorpion) {
+                // Convertir le coup en coordonnées (ligne, colonne) pour Morpion
+                int ligne = (coup - 1) / this.model.getRow();
+                int colonne = (coup - 1) % this.model.getCol();
+
+                if (this.verifierCoupValide(model.getGrid(), ligne, colonne)) {
+                    // Jouer le coup dans le modèle
+                    this.model.jouerCoup(ligne, colonne);
+                } else {
+                    this.view.saisirChoix();
+                }
+            } else if (model instanceof ModelPuissance4) {
+                // Convertir le coup en coordonnées (ligne, colonne) pour Puissance 4
+                int col = coup - 1; // Conversion du coup directement en numéro de colonne
+
+                if (this.verifierCoupValide(model.getGrid(), 0, col)) {
+                    // Jouer le coup dans le modèle (placer dans la première case vide de la colonne)
+                    int emptyRow = model.trouverEmptyRow(col);
+                    this.model.jouerCoup(emptyRow, col);
+                } else {
+                    this.view.saisirChoix();
+                }
+            }
+
+            // Vérifier si la partie est terminée
+            if (this.model.isGameOver()) {
+                this.view.afficherGameOver();
+            } else {
+                // Changer de joueur actif
+                this.model.changeCurrentPlayer();
+            }
+        } catch (Exception e) {
+            // Afficher une erreur si le coup n'est pas valide
+            this.view.afficherErrorCoup();
+        }
     }
+
 
     /**
      * Vérifie si un coup est valide en utilisant la stratégie spécifiée.
