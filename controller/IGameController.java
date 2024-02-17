@@ -24,5 +24,7 @@ public interface IGameController {
 
     public IModelJeu getModel();
 
+    public void setCoupValidStrategy(CoupValidStrategy coupValidStrategy);
+
     
 }

@@ -1,6 +1,7 @@
 package controller;
 
 import model.IModelJeu;
+import model.Piece;
 import view.IView;
 
 /**
@@ -10,9 +11,11 @@ public class GameController implements IGameController {
     private IView view;
 
     private IModelJeu model;
+    private  CoupValidStrategy coupValidStrategy;
 
   
 
+   
     /**
      * Constructeur de la classe GameController.
      *
@@ -43,11 +46,16 @@ public class GameController implements IGameController {
             int ligne = (coup - 1) / this.model.getRow() ;
             int colonne = (coup - 1) % this.model.getCol() ;
 
-            //TODO: VERIF VIA placement strategy 
+            if (this.verifierCoupValide(model.getGrid(), ligne, colonne)) {
+                // Jouer le coup dans le modèle
+                this.model.jouerCoup(ligne, colonne);
     
-            // Jouer le coup dans le modèle
-            this.model.jouerCoup(ligne, colonne);
+
+            } else {
+                this.view.saisirChoix();
+            }
     
+            
             // Vérifier si la partie est terminée
             if (this.model.isGameOver()) {
                 this.view.afficherGameOver();
@@ -59,6 +67,11 @@ public class GameController implements IGameController {
             // Afficher une erreur si le coup n'est pas valide
             this.view.afficherErrorCoup();
         }
+    }
+
+
+    public boolean verifierCoupValide (Piece[][] grid, int row, int col) {
+       return  this.coupValidStrategy.verifierCoupValide(grid, row, col);
     }
 
     @Override
@@ -73,6 +86,12 @@ public class GameController implements IGameController {
     public void setModel(IModelJeu model) {
         this.model = model;
     }
+
+
+    public void setCoupValidStrategy(CoupValidStrategy coupValidStrategy) {
+        this.coupValidStrategy = coupValidStrategy;
+    }
+
 
    
 }

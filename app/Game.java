@@ -1,8 +1,9 @@
 package app;
 
+import controller.CoupValideMorpion;
+import controller.CoupValidePuissance4;
 import controller.GameController;
 import controller.IGameController;
-import model.IModelJeu;
 import model.ModelJeu;
 import model.ModelMorpion;
 import model.ModelPuissance4;
@@ -37,12 +38,14 @@ class Game {
                 System.out.println("Choix morpion.");
 
                 modelJeu = new ModelMorpion(4, 4); // À remplacer par l'instanciation du modèle correspondant
+                controller.setCoupValidStrategy(new CoupValideMorpion());
                 break;
             case 2:
                 // Instanciation du modèle pour le jeu Puissance 4
                 System.out.println("Choix puissance 4.");
 
                  modelJeu = new ModelPuissance4(7, 6); // À remplacer par l'instanciation du modèle correspondant
+                 controller.setCoupValidStrategy(new CoupValidePuissance4());
                 break;
             default:
                 System.out.println("Choix invalide.");
@@ -51,6 +54,7 @@ class Game {
         view.subscribe(modelJeu);
 
         controller.setModel(modelJeu);
+      
 
       
         // Initialisation de la vue
