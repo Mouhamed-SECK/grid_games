@@ -1,46 +1,81 @@
+package view;
+
+import controller.IGameController;
+import model.Observable;
+
+
 /**
- * Interface defining the methods for game view interaction.
+ * Interface représentant la vue du jeu.
  */
 public interface IView {
-    /**
-     * Renders the game view.
-     */
-    void render();
 
     /**
-     * Displays the game over message.
+     * Initialise la vue du jeu.
      */
-    void finishGame();
+    void activateView();
 
     /**
-     * Gets the move from the player.
-     * @return the player's move
+     * Permet à un joueur de saisir un coup.
+     *
+     * @return Le coup saisi par le joueur.
      */
-    int getPlayerMove();
+    int saisirCoup();
 
     /**
-     * Displays the game choice menu.
-     * @return the game choice selected by the player
+     * Affiche le menu de choix du jeu et retourne le choix du joueur.
+     *
+     * @return Le choix du joueur.
      */
-    int displayGameChoice();
+    void afficherMenuChoixJeu();
 
     /**
-     * Updates the view.
+     * Affiche la grille de jeu.
      */
-    void update();
+    void afficherGrid();
+
+
+     public void subscribe(Observable o);
 
     /**
-     * Displays the current player's turn.
+     * Affiche le message de fin de partie.
      */
-    void displayCurrentPlayer();
+    void afficherGameOver();
 
     /**
-     * Displays the game over message.
+     * Affiche un message d'erreur pour un coup invalide.
      */
-    void displayGameOver();
+    void afficherErrorCoup();
 
     /**
-     * Displays an error if the move is invalid.
+     * Définit le contrôleur pour la vue.
+     * @param controller Le contrôleur à définir.
      */
-    void displayErrorMove();
+    void setController(IGameController IGmeController);
+
+
+      /**
+     * Permet au joueur de saisir son choix de jeu.
+     *
+     * @return Le choix de jeu du joueur.
+     */
+    public int saisirChoixJeu();
+
+    /**
+     * Affiche le joueur actif avec une couleur.
+     * Utilise les codes de couleur ANSI pour afficher les noms des joueurs en rouge ou en bleu.
+    */
+    public void afficherCurrentPlayer();
+
+
+
+      /**
+     * Permet au joueur de saisir de poser un coup ou de quitter  .
+     *
+     * @return Le choix  du joueur soit 1 pour jouer ou 2 pour quitter.
+     */
+    public int saisirChoix();
+
+
+    
+
 }

@@ -3,7 +3,7 @@ package model;
 /**
  * Interface for the Subject in the Observer pattern.
  */
-public interface Subject {
+public interface Observable {
     void notifyObservers();
 
     void addObserver(Observer o);

@@ -3,7 +3,7 @@ package model;
 /**
  * Extension of GameManagerModel for the game "Puissance4".
  */
-public class Puissance4 extends GameManagerModel {
+public class ModelPuissance4 extends ModelJeu {
     /**
      * Constructor for Puissance4.
      *
@@ -11,7 +11,7 @@ public class Puissance4 extends GameManagerModel {
      * @param col  The number of columns in the grid.
      * @param grid The initial grid configuration.
      */
-    public Puissance4(int row, int col, Piece[][] grid) {
-        super(row, col, grid);
+    public ModelPuissance4(int row, int col) {
+        super(row, col);
     }
 }

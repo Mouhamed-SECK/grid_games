@@ -3,7 +3,7 @@ package model;
 /**
  * Extension of GameManagerModel for the game "Morpion".
  */
-public class Morpion extends GameManagerModel {
+public class ModelMorpion extends ModelJeu {
     /**
      * Constructor for Morpion.
      *
@@ -11,7 +11,7 @@ public class Morpion extends GameManagerModel {
      * @param col  The number of columns in the grid.
      * @param grid The initial grid configuration.
      */
-    public Morpion(int row, int col, Piece[][] grid) {
-        super(row, col, grid);
+    public ModelMorpion(int row, int col) {
+        super(row, col);
     }
 }
