@@ -193,8 +193,5 @@ public class ModelJeu implements IModelJeu, Observable {
         }
         throw new IllegalArgumentException("La colonne est pleine.");
     }
-    
-
-   
 
 }

@@ -31,36 +31,7 @@ public class GameController implements IGameController {
     public GameController() {
     }
 
-/*     @Override
-    public void gererSaisie() {
-        try {
-            // Saisir le coup depuis la vue
-            int coup = this.view.saisirCoup();
-    
-            // Convertir le coup en coordonnées (ligne, colonne)
-            int ligne = (coup - 1) / this.model.getRow() ;
-            int colonne = (coup - 1) % this.model.getCol() ;
-
-            if (this.verifierCoupValide(model.getGrid(), ligne, colonne)) {
-                // Jouer le coup dans le modèle
-                this.model.jouerCoup(ligne, colonne);
-            } else {
-                this.view.saisirChoix();
-            }
-    
-            // Vérifier si la partie est terminée
-            if (this.model.isGameOver()) {
-                this.view.afficherGameOver();
-            } else {
-                // Changer de joueur actif
-                this.model.changeCurrentPlayer();
-            }
-        } catch (Exception e) {
-            // Afficher une erreur si le coup n'est pas valide
-            this.view.afficherErrorCoup();
-        }
-    } */
-
+    @Override
     public void gererSaisie() {
         try {
             // Saisir le coup depuis la vue
