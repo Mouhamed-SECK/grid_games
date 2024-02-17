@@ -1,9 +1,7 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import controller.IGameController;
@@ -179,7 +177,22 @@ public class ModelJeu implements IModelJeu, Observable {
         return currentPlayer;
     }
 
-
+    /**
+     * Trouve la première ligne vide dans une colonne spécifiée.
+     *
+     * @param col La colonne où rechercher la première ligne vide.
+     * @return L'index de la première ligne vide dans la colonne.
+     * @throws IllegalArgumentException Si la colonne est pleine.
+     */
+    public int trouverEmptyRow(int col) {
+        Piece[][] grid = this.getGrid();
+        for (int row = grid.length - 1; row >= 0; row--) {
+            if (grid[row][col] == Piece.EMPTY) {
+                return row;
+            }
+        }
+        throw new IllegalArgumentException("La colonne est pleine.");
+    }
     
 
    
