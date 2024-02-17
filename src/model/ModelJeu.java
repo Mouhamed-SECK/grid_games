@@ -11,10 +11,11 @@ import controller.IGameController;
 /**
  * Classe de base pour le modèle du gestionnaire de jeu.
  */
-public class ModelJeu implements IModelJeu, Observable {
+public abstract class ModelJeu implements IModelJeu, Observable {
+
     private int row;
     private int col;
-    private Piece[][] grid;
+    protected Piece[][] grid;
     private List<Observer> observers;
     private  Player currentPlayer;
 
@@ -56,11 +57,7 @@ public class ModelJeu implements IModelJeu, Observable {
      *
      * @return Vrai si le jeu est terminé, sinon faux.
      */
-    public boolean isGameOver() {
-        // Implémenter la logique de fin de jeu
-        // TODO need to be define pour les deux jeux  transformer en abstract chaque sous classe donne sa maniére de verifier 
-        return false;
-    }
+    public abstract boolean isGameOver();
 
     /**
      * Récupère le nombre de lignes dans la grille.
