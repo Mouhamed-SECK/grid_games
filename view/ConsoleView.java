@@ -11,7 +11,6 @@ import model.Observer;
 import model.Piece;
 import model.Player;
 import controller.IGameController;
-import model.ModelJeu;
 import model.Observable;
 
 

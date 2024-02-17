@@ -5,6 +5,7 @@ import controller.IGameController;
 import model.IModelJeu;
 import model.ModelJeu;
 import model.ModelMorpion;
+import model.ModelPuissance4;
 import view.ConsoleView;
 import view.IView;
 
@@ -41,7 +42,7 @@ class Game {
                 // Instanciation du modèle pour le jeu Puissance 4
                 System.out.println("Choix puissance 4.");
 
-                // model = new Puissance4Model(); // À remplacer par l'instanciation du modèle correspondant
+                 modelJeu = new ModelPuissance4(7, 6); // À remplacer par l'instanciation du modèle correspondant
                 break;
             default:
                 System.out.println("Choix invalide.");

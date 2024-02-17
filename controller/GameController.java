@@ -43,7 +43,7 @@ public class GameController implements IGameController {
             int ligne = (coup - 1) / this.model.getRow() ;
             int colonne = (coup - 1) % this.model.getCol() ;
 
-            //TODO: VERIF
+            //TODO: VERIF VIA placement strategy 
     
             // Jouer le coup dans le modèle
             this.model.jouerCoup(ligne, colonne);

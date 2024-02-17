@@ -45,7 +45,7 @@ public class ModelJeu implements IModelJeu, Observable {
         Piece[][] grid = new Piece[row][col];
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                grid[j][i] = Piece.EMPTY;
+                grid[i][j] = Piece.EMPTY;
             }
         }
         this.grid = grid;
@@ -58,6 +58,7 @@ public class ModelJeu implements IModelJeu, Observable {
      */
     public boolean isGameOver() {
         // Implémenter la logique de fin de jeu
+        // TODO need to be define pour les deux jeux  transformer en abstract chaque sous classe donne sa maniére de verifier 
         return false;
     }
 
