@@ -111,8 +111,33 @@ public class ConsoleView implements IView, Observer {
      */
     @Override
     public void afficherGameOver() {
-        // Affichage du message de fin de partie
-    }
+        Player currentPlayer = this.controller.getModel().getCurrentPlayer();
+        String currentPlayerName = "";
+        String currentPlayerColor = "";
+        String winningMessage = "";
+    
+        // Déterminer le nom et la couleur du joueur actif
+        if (currentPlayer == Player.CROSS) {
+            currentPlayerName = "Joueur 1";
+            currentPlayerColor = "\u001B[31m"; // Rouge pour le joueur 1
+        } else if (currentPlayer == Player.CIRCLE) {
+            currentPlayerName = "Joueur 2";
+            currentPlayerColor = "\u001B[34m"; // Bleu pour le joueur 2
+        }
+    
+        // Construire le message de victoire
+        winningMessage = "Bravo " + currentPlayerName + ", vous avez gagné !";
+    
+        // Afficher le message de fin de partie encadré avec le message de victoire en couleur
+        System.out.println("+--------------------------------------------+");
+        System.out.println("|                  GAME OVER                 |");
+        System.out.println("+--------------------------------------------+");
+        System.out.println("|                                            |");
+        System.out.println("| " + currentPlayerColor + winningMessage + "\u001B[0m          |");
+        System.out.println("|                                            |");
+        System.out.println("+--------------------------------------------+");
+
+    } 
 
     /**
      * Affiche un message d'erreur pour un coup invalide.

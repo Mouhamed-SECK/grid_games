@@ -3,7 +3,7 @@ package model;
 /**
  * Extension of GameManagerModel for the game "Morpion".
  */
-public   class ModelMorpion extends ModelJeu {
+public  class ModelMorpion extends ModelJeu {
     /**
      * Constructor for Morpion.
      *

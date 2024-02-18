@@ -43,9 +43,7 @@ public class GameController implements IGameController {
 
             // Jouer le coup dans le modèle
             this.model.jouerCoup();
-            
-      
-          
+    
 
             // Vérifier si la partie est terminée
             if (this.model.isGameOver()) {
@@ -57,6 +55,7 @@ public class GameController implements IGameController {
         } catch (Exception e) {
             // Afficher une erreur si le coup n'est pas valide
             this.view.afficherErrorCoup();
+            this.model.notifyObservers();
         }
     }
 
