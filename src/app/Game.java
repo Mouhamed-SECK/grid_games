@@ -42,14 +42,14 @@ public class Game {
                 // Instanciation du modèle pour le jeu Tic-Tac-Toe
                 System.out.println("Choix morpion.");
 
-                modelJeu = new ModelMorpion(4, 4); // À remplacer par l'instanciation du modèle correspondant
+                modelJeu = new ModelMorpion(3, 3); // À remplacer par l'instanciation du modèle correspondant
                 controller.setCoupValidStrategy(new CoupValideMorpion());
                 break;
             case 2:
                 // Instanciation du modèle pour le jeu Puissance 4
                 System.out.println("Choix puissance 4.");
 
-                 modelJeu = new ModelPuissance4(7, 6); // À remplacer par l'instanciation du modèle correspondant
+                 modelJeu = new ModelPuissance4(4, 5); // À remplacer par l'instanciation du modèle correspondant
                  controller.setCoupValidStrategy(new CoupValidePuissance4());
                 break;
             default:
