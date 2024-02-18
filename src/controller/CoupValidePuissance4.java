@@ -20,26 +20,27 @@ public class CoupValidePuissance4 implements CoupValidStrategy {
     @Override
     public Coup verifierCoupValide(Piece[][] grid,int coup) throws Exception {
 
-      // Calculer la colonne et la ligne à partir du coup
-    int col = (coup - 1) % grid[0].length;
-    int row = grid.length - 1;
+        if (coup < 0 || coup >= grid[0].length  * grid.length)  {
+            throw new Exception("Coup non valide : colonne hors limites");
+        }
 
-    // Vérifier si la colonne est valide
-    if (col < 0 || col >= grid[0].length) {
-        throw new Exception("Coup non valide : colonne hors limites");
-    }
-
-    // Trouver la première case vide dans la colonne
-    while (row >= 0 && grid[row][col] != Piece.EMPTY) {
-        row--;
-    }
-
-    // Vérifier si la colonne contient une case vide
-    if (row < 0) {
-        throw new Exception("Coup non valide : colonne pleine");
-    }
-
-    return new Coup(row, col);
+        int col = (coup - 1) % grid[0].length;
+        int row = grid.length - 1;
+    
+        // Vérifier si la colonne est valide
+       
+    
+        // Trouver la première case vide dans la colonne
+        while (row >= 0 && grid[row][col] != Piece.EMPTY) {
+            row--;
+        }
+    
+        // Vérifier si la colonne contient une case vide
+        if (row < 0) {
+            throw new Exception("Coup non valide : colonne pleine");
+        }
+    
+        return new Coup(row, col);
 
 
 
