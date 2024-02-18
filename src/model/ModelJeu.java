@@ -80,18 +80,16 @@ public class ModelJeu implements IModelJeu, Observable {
     }
 
 
-
     /**
      * Méthode alternative pour jouer un coup.
      *
      * @param row La ligne du mouvement.
      * @param col La colonne du mouvement.
      */
-    public void jouerCoup(int row, int col ) {
+   /*  public void jouerCoup(int row, int col ) {
         this.grid[row][col] = currentPlayer == Player.CROSS ? Piece.CROSS : Piece.CIRCLE;
         this.notifyObservers();
-        
-    }
+    } */
 
     /**
      * Définit la grille du jeu.
@@ -175,23 +173,6 @@ public class ModelJeu implements IModelJeu, Observable {
      */
     public Player getCurrentPlayer() {
         return currentPlayer;
-    }
-
-    /**
-     * Trouve la première ligne vide dans une colonne spécifiée.
-     *
-     * @param col La colonne où rechercher la première ligne vide.
-     * @return L'index de la première ligne vide dans la colonne.
-     * @throws IllegalArgumentException Si la colonne est pleine.
-     */
-    public int trouverEmptyRow(int col) {
-        Piece[][] grid = this.getGrid();
-        for (int row = grid.length - 1; row >= 0; row--) {
-            if (grid[row][col] == Piece.EMPTY) {
-                return row;
-            }
-        }
-        throw new IllegalArgumentException("La colonne est pleine.");
     }
 
 }

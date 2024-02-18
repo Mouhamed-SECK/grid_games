@@ -25,7 +25,7 @@ public interface IModelJeu {
      * @param row La ligne du mouvement.
      * @param col La colonne du mouvement.
      */
-    void jouerCoup(int row, int col);
+    //void jouerCoup(int row, int col);
 
     /**
      * Permet de recuperer la grille 
@@ -90,14 +90,4 @@ public interface IModelJeu {
      * @return Le nombre de colonnes .
      */
     public int getCol();
-
-    /**
-     * Trouve la première ligne vide dans une colonne spécifiée.
-     *
-     * @param col La colonne où rechercher la première ligne vide.
-     * @return L'index de la première ligne vide dans la colonne.
-     * @throws IllegalArgumentException Si la colonne est pleine.
-     */
-    int trouverEmptyRow(int col);
-
 }

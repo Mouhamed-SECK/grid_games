@@ -17,4 +17,12 @@ public interface CoupValidStrategy {
      * @return true si le coup est valide, false sinon.
      */
     boolean verifierCoupValide(Piece[][] grid, int col, int row);
+
+    /**
+     * Effectue le mouvement d'un joueur.
+     *
+     * @param row La ligne du mouvement.
+     * @param col La colonne du mouvement.
+     */
+    void jouerCoup(int row, int col);
 }
