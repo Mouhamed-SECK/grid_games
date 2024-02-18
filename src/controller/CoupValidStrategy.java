@@ -1,5 +1,6 @@
 package controller;
 
+import model.Coup;
 import model.Piece;
 
 /**
@@ -16,5 +17,5 @@ public interface CoupValidStrategy {
      * @param row  La ligne où le coup est proposé.
      * @return true si le coup est valide, false sinon.
      */
-    boolean verifierCoupValide(Piece[][] grid, int col, int row);
+    Coup verifierCoupValide(Piece[][] grid, int coup) throws Exception;
 }

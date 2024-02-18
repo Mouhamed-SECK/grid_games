@@ -119,7 +119,9 @@ public class ConsoleView implements IView, Observer {
      */
     @Override
     public void afficherErrorCoup() {
-        System.out.println("Coup invalide. Veuillez réessayer.");
+        System.err.println();
+       // Couleur rouge pour l'erreur
+        System.out.println("\u001B[31mCOUP INVALIDE. VEUILLEZ RÉESSAYER.\u001B[0m");
     }
 
     /**

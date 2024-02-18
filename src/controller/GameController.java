@@ -1,5 +1,6 @@
 package controller;
 
+import model.Coup;
 import model.IModelJeu;
 import model.ModelMorpion;
 import model.ModelPuissance4;
@@ -37,29 +38,14 @@ public class GameController implements IGameController {
             // Saisir le coup depuis la vue
             int coup = this.view.saisirCoup();
 
-            if (model instanceof ModelMorpion) {
-                // Convertir le coup en coordonnées (ligne, colonne) pour Morpion
-                int ligne = (coup - 1) / this.model.getRow();
-                int colonne = (coup - 1) % this.model.getCol();
 
-                if (this.verifierCoupValide(model.getGrid(), ligne, colonne)) {
-                    // Jouer le coup dans le modèle
-                    this.model.jouerCoup(ligne, colonne);
-                } else {
-                    this.view.saisirChoix();
-                }
-            } else if (model instanceof ModelPuissance4) {
-                // Convertir le coup en coordonnées (ligne, colonne) pour Puissance 4
-                int col = coup - 1; // Conversion du coup directement en numéro de colonne
+            this.verifierCoupValide(model.getGrid(),  coup);
 
-                if (this.verifierCoupValide(model.getGrid(), 0, col)) {
-                    // Jouer le coup dans le modèle (placer dans la première case vide de la colonne)
-                    int emptyRow = model.trouverEmptyRow(col);
-                    this.model.jouerCoup(emptyRow, col);
-                } else {
-                    this.view.saisirChoix();
-                }
-            }
+            // Jouer le coup dans le modèle
+            this.model.jouerCoup();
+            
+      
+          
 
             // Vérifier si la partie est terminée
             if (this.model.isGameOver()) {
@@ -83,8 +69,9 @@ public class GameController implements IGameController {
      * @param col  La colonne où le coup est proposé.
      * @return true si le coup est valide, false sinon.
      */
-    public boolean verifierCoupValide (Piece[][] grid, int row, int col) {
-       return  this.coupValidStrategy.verifierCoupValide(grid, row, col);
+    public void verifierCoupValide (Piece[][] grid, int coup)  throws Exception{
+        Coup  valideCoup = this.coupValidStrategy.verifierCoupValide(grid,  coup);
+        this.model.setCoupProposed(valideCoup);
     }
 
     /**

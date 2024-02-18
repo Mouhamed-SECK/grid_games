@@ -1,5 +1,6 @@
 package controller;
 
+import model.Coup;
 import model.Piece;
 
 /**
@@ -17,20 +18,31 @@ public class CoupValidePuissance4 implements CoupValidStrategy {
      * @return true si le coup est valide, false sinon.
      */
     @Override
-    public boolean verifierCoupValide(Piece[][] grid, int col, int row) {
-        // Vérifier si la colonne est valide
-        if (col < 0 || col >= grid[0].length) {
-            return false;
-        }
+    public Coup verifierCoupValide(Piece[][] grid,int coup) throws Exception {
 
-        // Trouver la première case vide dans la colonne
-        int emptyRow = grid.length - 1;
-        while (emptyRow >= 0 && grid[emptyRow][col] != Piece.EMPTY) {
-            emptyRow--;
-        }
+      // Calculer la colonne et la ligne à partir du coup
+    int col = (coup - 1) % grid[0].length;
+    int row = grid.length - 1;
 
-        // Vérifier si la colonne contient une case vide
-        return emptyRow >= 0;
+    // Vérifier si la colonne est valide
+    if (col < 0 || col >= grid[0].length) {
+        throw new Exception("Coup non valide : colonne hors limites");
+    }
+
+    // Trouver la première case vide dans la colonne
+    while (row >= 0 && grid[row][col] != Piece.EMPTY) {
+        row--;
+    }
+
+    // Vérifier si la colonne contient une case vide
+    if (row < 0) {
+        throw new Exception("Coup non valide : colonne pleine");
+    }
+
+    return new Coup(row, col);
+
+
+
     }
 }
 

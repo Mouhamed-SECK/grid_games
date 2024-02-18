@@ -25,7 +25,7 @@ public interface IModelJeu {
      * @param row La ligne du mouvement.
      * @param col La colonne du mouvement.
      */
-    void jouerCoup(int row, int col);
+    void jouerCoup();
 
     /**
      * Permet de recuperer la grille 
@@ -99,5 +99,17 @@ public interface IModelJeu {
      * @throws IllegalArgumentException Si la colonne est pleine.
      */
     int trouverEmptyRow(int col);
+
+
+     /**
+     * Notifie tous les observateurs en appelant leur méthode update.
+     */
+    public void notifyObservers();
+
+
+    public Coup getCoupProposed();
+
+
+    public void setCoupProposed(Coup coupProposed) ;
 
 }

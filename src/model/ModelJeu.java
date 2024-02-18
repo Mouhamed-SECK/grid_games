@@ -10,8 +10,11 @@ import controller.IGameController;
  * Classe de base pour le modèle du gestionnaire de jeu.
  */
 public class ModelJeu implements IModelJeu, Observable {
-    private int row;
-    private int col;
+
+    private Coup coupProposed;
+ 
+
+    private int row, col;
     private Piece[][] grid;
     private List<Observer> observers;
     private  Player currentPlayer;
@@ -87,7 +90,11 @@ public class ModelJeu implements IModelJeu, Observable {
      * @param row La ligne du mouvement.
      * @param col La colonne du mouvement.
      */
-    public void jouerCoup(int row, int col ) {
+    public void jouerCoup( ) {
+        int row = this.coupProposed.getRow();
+        int col = this.coupProposed.getCol();
+
+
         this.grid[row][col] = currentPlayer == Player.CROSS ? Piece.CROSS : Piece.CIRCLE;
         this.notifyObservers();
         
@@ -192,6 +199,16 @@ public class ModelJeu implements IModelJeu, Observable {
             }
         }
         throw new IllegalArgumentException("La colonne est pleine.");
+    }
+
+
+    public Coup getCoupProposed() {
+        return coupProposed;
+    }
+
+
+    public void setCoupProposed(Coup coupProposed) {
+        this.coupProposed = coupProposed;
     }
 
 }
