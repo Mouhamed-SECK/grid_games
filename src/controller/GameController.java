@@ -1,6 +1,9 @@
 package controller;
 
+import model.Coup;
 import model.IModelJeu;
+import model.ModelMorpion;
+import model.ModelPuissance4;
 import model.Piece;
 import view.IView;
 
@@ -34,30 +37,33 @@ public class GameController implements IGameController {
         try {
             // Saisir le coup depuis la vue
             int coup = this.view.saisirCoup();
-    
-            // Convertir le coup en coordonnées (ligne, colonne)
-            int ligne = (coup - 1) / this.model.getRow() ;
-            int colonne = (coup - 1) % this.model.getCol() ;
+            // Vérifier la validité du coup
+            this.verifierCoupValide(model.getGrid(), coup);
+            
+            // Jouer le coup dans le modèle
+            this.model.jouerCoup();
 
-            if (this.verifierCoupValide(model.getGrid(), ligne, colonne)) {
-                // Jouer le coup dans le modèle
-                this.model.jouerCoup(ligne, colonne);
-            } else {
-                this.view.saisirChoix();
-            }
-    
-            // Vérifier si la partie est terminée
-            if (this.model.isGameOver()) {
-                this.view.afficherGameOver();
-            } else {
-                // Changer de joueur actif
-                this.model.changeCurrentPlayer();
+            // Vérifier l'état de la partie après le coup
+            GameStatus status = this.model.isGameOver();
+            switch (status) {
+                case PLAYER_1_WIN:
+                case PLAYER_2_WIN:
+                case DRAW:
+                    this.view.afficherGameOver(status);
+                    break;
+                case IN_PROGRESS:
+                    // Changer de joueur actif
+                    this.model.changeCurrentPlayer();
+                    break;
             }
         } catch (Exception e) {
             // Afficher une erreur si le coup n'est pas valide
             this.view.afficherErrorCoup();
+            this.model.notifyObservers();
         }
     }
+
+
 
     /**
      * Vérifie si un coup est valide en utilisant la stratégie spécifiée.
@@ -67,8 +73,9 @@ public class GameController implements IGameController {
      * @param col  La colonne où le coup est proposé.
      * @return true si le coup est valide, false sinon.
      */
-    public boolean verifierCoupValide (Piece[][] grid, int row, int col) {
-       return  this.coupValidStrategy.verifierCoupValide(grid, row, col);
+    public void verifierCoupValide (Piece[][] grid, int coup)  throws Exception{
+        Coup  valideCoup = this.coupValidStrategy.verifierCoupValide(grid,  coup);
+        this.model.setCoupProposed(valideCoup);
     }
 
     /**

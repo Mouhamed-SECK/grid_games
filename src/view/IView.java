@@ -1,5 +1,6 @@
 package view;
 
+import controller.GameStatus;
 import controller.IGameController;
 import model.Observable;
 
@@ -38,7 +39,7 @@ public interface IView {
     /**
      * Affiche le message de fin de partie.
      */
-    void afficherGameOver();
+    void afficherGameOver(GameStatus status);
 
     /**
      * Affiche un message d'erreur pour un coup invalide.

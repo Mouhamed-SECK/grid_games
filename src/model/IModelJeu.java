@@ -1,6 +1,7 @@
 package model;
 
 import controller.IGameController;
+import controller.GameStatus;
 
 /**
  * Interface for the game manager model.
@@ -14,9 +15,9 @@ public interface IModelJeu {
     /**
      * Vérifie si le jeu est terminé.
      *
-     * @return Vrai si le jeu est terminé, sinon faux.
+     * @return l'état du jeu.
      */
-    boolean isGameOver();
+    public GameStatus isGameOver();
 
 
     /**
@@ -25,7 +26,7 @@ public interface IModelJeu {
      * @param row La ligne du mouvement.
      * @param col La colonne du mouvement.
      */
-    void jouerCoup(int row, int col);
+    void jouerCoup();
 
     /**
      * Permet de recuperer la grille 
@@ -76,7 +77,7 @@ public interface IModelJeu {
     public Player getCurrentPlayer();
 
 
-       /**
+    /**
      * Récupère le nombre de lignes dans la grille.
      *
      * @return Le nombre de lignes.
@@ -84,11 +85,23 @@ public interface IModelJeu {
     public int getRow();
 
 
-       /**
+    /**
      * Récupère le nombre de colonnes dans la grille.
      *
      * @return Le nombre de colonnes .
      */
     public int getCol();
+
+
+     /**
+     * Notifie tous les observateurs en appelant leur méthode update.
+     */
+    public void notifyObservers();
+
+
+    public Coup getCoupProposed();
+
+
+    public void setCoupProposed(Coup coupProposed) ;
 
 }

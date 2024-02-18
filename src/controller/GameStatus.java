@@ -1,8 +1,11 @@
 package controller;
 
 /**
- * Enumération représentant les différents états possibles d'un jeu.
+ * Énumération représentant l'état du jeu.
  */
 public enum GameStatus {
-    // Ajouter les états du jeu si nécessaire
+    IN_PROGRESS,
+    PLAYER_1_WIN,
+    PLAYER_2_WIN,
+    DRAW
 }

@@ -1,4 +1,5 @@
 package model;
+import controller.GameStatus;
 
 /**
  * Extension of GameManagerModel for the game "Puissance4".
@@ -16,7 +17,7 @@ public class ModelPuissance4 extends ModelJeu {
     }
 
     @Override
-    public boolean isGameOver() {
+    public GameStatus isGameOver() {
         // Check all possible directions for a winning line
         for (int rowIndex = 0; rowIndex < getRow(); rowIndex++) {
             for (int colIndex = 0; colIndex < getCol(); colIndex++) {
@@ -25,13 +26,17 @@ public class ModelPuissance4 extends ModelJeu {
                         checkHorizontal(rowIndex, colIndex) || 
                         checkDiagonalRight(rowIndex, colIndex) || 
                         checkDiagonalLeft(rowIndex, colIndex)) {
-                        return true; // A player has won
+                        return currentPlayer == Player.CROSS ? GameStatus.PLAYER_1_WIN : GameStatus.PLAYER_2_WIN;
                     }
                 }
             }
         }
-        return isGridFull(); // The game is a draw if the grid is full
+        if (isGridFull()) {
+            return GameStatus.DRAW;
+        }
+        return GameStatus.IN_PROGRESS;
     }
+    
     
     private boolean checkVertical(int rowIndex, int colIndex) {
         Piece first = grid[rowIndex][colIndex];

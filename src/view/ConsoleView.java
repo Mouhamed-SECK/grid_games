@@ -6,8 +6,10 @@ import java.util.Scanner;
 import model.Observer;
 import model.Piece;
 import model.Player;
+import controller.GameStatus;
 import controller.IGameController;
 import model.Observable;
+
 
 /**
  * Classe représentant la vue du jeu dans la console.
@@ -61,7 +63,7 @@ public class ConsoleView implements IView, Observer {
             
             // Mettre à jour la vue après le choix de l'utilisateur
       
-        } while (!this.controller.getModel().isGameOver() && choix != 2);
+        } while ((this.controller.getModel().isGameOver() == GameStatus.IN_PROGRESS) && choix != 2);
     }
 
     /**
@@ -110,16 +112,44 @@ public class ConsoleView implements IView, Observer {
      * Affiche le message de fin de partie.
      */
     @Override
-    public void afficherGameOver() {
-        // Affichage du message de fin de partie
-    }
+    public void afficherGameOver(GameStatus status) {
+        String message;
+        switch (status) {
+            case PLAYER_1_WIN:
+                message = "Joueur 1 a gagné !";
+                break;
+            case PLAYER_2_WIN:
+                message = "Joueur 2 a gagné !";
+                break;
+            case DRAW:
+                message = "La partie est une égalité !";
+                break;
+            default:
+                message = "Erreur: Statut de partie invalide.";
+                break;
+        }
+        
+    
+        // Afficher le message de fin de partie encadré avec le message de victoire en couleur
+        System.out.println("+-----------------------------+");
+        System.out.println("|   GAME OVER                 |");
+        System.out.println("+-----------------------------+");
+        System.out.println("|                             |");
+        System.out.println("| " +  message + "\u001B[0m     |");
+        System.out.println("|                             |");
+        System.out.println("+-----------------------------+");
+
+    } 
+
 
     /**
      * Affiche un message d'erreur pour un coup invalide.
      */
     @Override
     public void afficherErrorCoup() {
-        System.out.println("Coup invalide. Veuillez réessayer.");
+        System.err.println();
+       // Couleur rouge pour l'erreur
+        System.out.println("\u001B[31mCOUP INVALIDE. VEUILLEZ RÉESSAYER.\u001B[0m");
     }
 
     /**

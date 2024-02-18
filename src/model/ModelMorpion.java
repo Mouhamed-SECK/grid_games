@@ -1,9 +1,10 @@
 package model;
+import controller.GameStatus;
 
 /**
  * Extension of GameManagerModel for the game "Morpion".
  */
-public class ModelMorpion extends ModelJeu {
+public  class ModelMorpion extends ModelJeu {
     /**
      * Constructor for Morpion.
      *
@@ -15,18 +16,22 @@ public class ModelMorpion extends ModelJeu {
     }
 
     @Override
-    public boolean isGameOver() {
+    public GameStatus isGameOver() {
         // Check for a winning line or a full board
         for (int i = 0; i < 3; i++) {
             if (checkRow(i) || checkColumn(i)) {
-                return true; // A player has won
+                return currentPlayer == Player.CROSS ? GameStatus.PLAYER_1_WIN : GameStatus.PLAYER_2_WIN;
             }
         }
         if (checkDiagonals()) {
-            return true; // A player has won
+            return currentPlayer == Player.CROSS ? GameStatus.PLAYER_1_WIN : GameStatus.PLAYER_2_WIN;
         }
-        return isGridFull(); // The game is a draw if the grid is full
+        if (isGridFull()) {
+            return GameStatus.DRAW;
+        }
+        return GameStatus.IN_PROGRESS;
     }
+    
     
     private boolean checkRow(int rowIndex) {
         Piece first = grid[rowIndex][0];

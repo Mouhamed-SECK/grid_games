@@ -9,6 +9,7 @@ import model.ModelMorpion;
 import model.ModelPuissance4;
 import view.ConsoleView;
 import view.IView;
+import controller.GameStatus;
 
 /**
  * Classe principale représentant le jeu.
@@ -48,9 +49,8 @@ public class Game {
             case 2:
                 // Instanciation du modèle pour le jeu Puissance 4
                 System.out.println("Choix puissance 4.");
-
-                 modelJeu = new ModelPuissance4(4, 5); // À remplacer par l'instanciation du modèle correspondant
-                 controller.setCoupValidStrategy(new CoupValidePuissance4());
+                modelJeu = new ModelPuissance4(7, 6); // À remplacer par l'instanciation du modèle correspondant
+                controller.setCoupValidStrategy(new CoupValidePuissance4());
                 break;
             default:
                 System.out.println("Choix invalide.");

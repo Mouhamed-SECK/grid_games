@@ -1,24 +1,23 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import controller.IGameController;
+import controller.GameStatus;
 
 /**
  * Classe de base pour le modèle du gestionnaire de jeu.
  */
-public abstract class ModelJeu implements IModelJeu, Observable {
+public abstract class ModelJeu implements  IModelJeu, Observable {
 
     private int row;
+    private Coup coupProposed;
     private int col;
     protected Piece[][] grid;
     private List<Observer> observers;
-    private  Player currentPlayer;
-
+    protected Player currentPlayer;
     private IGameController controller; // Lien avec le contrôleur
 
     /**
@@ -34,10 +33,9 @@ public abstract class ModelJeu implements IModelJeu, Observable {
         this.observers = new ArrayList<>();
         this.initGrid();
 
-         // Générer un nombre aléatoire entre 0 et 1 inclus pour decider de qui commence 
+        // Générer un nombre aléatoire entre 0 et 1 inclus pour décider de qui commence
         currentPlayer = (new Random().nextInt(2) == 0) ? Player.CROSS : Player.CIRCLE;
     }
- 
 
     /**
      * Initialise la grille du jeu.
@@ -57,7 +55,7 @@ public abstract class ModelJeu implements IModelJeu, Observable {
      *
      * @return Vrai si le jeu est terminé, sinon faux.
      */
-    public abstract boolean isGameOver();
+    public abstract GameStatus isGameOver();
 
     /**
      * Récupère le nombre de lignes dans la grille.
@@ -68,28 +66,24 @@ public abstract class ModelJeu implements IModelJeu, Observable {
         return row;
     }
 
-
     /**
      * Récupère le nombre de colonnes dans la grille.
      *
-     * @return Le nombre de colonnes .
+     * @return Le nombre de colonnes.
      */
     public int getCol() {
-        return row;
+        return col;
     }
-
-
 
     /**
      * Méthode alternative pour jouer un coup.
-     *
-     * @param row La ligne du mouvement.
-     * @param col La colonne du mouvement.
      */
-    public void jouerCoup(int row, int col ) {
+    public void jouerCoup() {
+        int row = this.coupProposed.getRow();
+        int col = this.coupProposed.getCol();
+
         this.grid[row][col] = currentPlayer == Player.CROSS ? Piece.CROSS : Piece.CIRCLE;
         this.notifyObservers();
-        
     }
 
     /**
@@ -176,9 +170,12 @@ public abstract class ModelJeu implements IModelJeu, Observable {
         return currentPlayer;
     }
 
+    public Coup getCoupProposed() {
+        return coupProposed;
+    }
 
-    
-
-   
+    public void setCoupProposed(Coup coupProposed) {
+        this.coupProposed = coupProposed;
+    }
 
 }
