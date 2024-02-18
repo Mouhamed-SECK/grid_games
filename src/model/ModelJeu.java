@@ -9,16 +9,14 @@ import controller.IGameController;
 /**
  * Classe de base pour le modèle du gestionnaire de jeu.
  */
-public class ModelJeu implements IModelJeu, Observable {
+public abstract class ModelJeu implements  IModelJeu, Observable {
 
+    private int row;
     private Coup coupProposed;
- 
-
-    private int row, col;
-    private Piece[][] grid;
+    private int col;
+    protected Piece[][] grid;
     private List<Observer> observers;
-    private  Player currentPlayer;
-
+    private Player currentPlayer;
     private IGameController controller; // Lien avec le contrôleur
 
     /**
@@ -34,10 +32,9 @@ public class ModelJeu implements IModelJeu, Observable {
         this.observers = new ArrayList<>();
         this.initGrid();
 
-         // Générer un nombre aléatoire entre 0 et 1 inclus pour decider de qui commence 
+        // Générer un nombre aléatoire entre 0 et 1 inclus pour décider de qui commence
         currentPlayer = (new Random().nextInt(2) == 0) ? Player.CROSS : Player.CIRCLE;
     }
- 
 
     /**
      * Initialise la grille du jeu.
@@ -57,11 +54,7 @@ public class ModelJeu implements IModelJeu, Observable {
      *
      * @return Vrai si le jeu est terminé, sinon faux.
      */
-    public boolean isGameOver() {
-        // Implémenter la logique de fin de jeu
-        // TODO need to be define pour les deux jeux  transformer en abstract chaque sous classe donne sa maniére de verifier 
-        return false;
-    }
+    public abstract boolean isGameOver();
 
     /**
      * Récupère le nombre de lignes dans la grille.
@@ -72,32 +65,24 @@ public class ModelJeu implements IModelJeu, Observable {
         return row;
     }
 
-
     /**
      * Récupère le nombre de colonnes dans la grille.
      *
-     * @return Le nombre de colonnes .
+     * @return Le nombre de colonnes.
      */
     public int getCol() {
-        return row;
+        return col;
     }
-
-
 
     /**
      * Méthode alternative pour jouer un coup.
-     *
-     * @param row La ligne du mouvement.
-     * @param col La colonne du mouvement.
      */
-    public void jouerCoup( ) {
+    public void jouerCoup() {
         int row = this.coupProposed.getRow();
         int col = this.coupProposed.getCol();
 
-
         this.grid[row][col] = currentPlayer == Player.CROSS ? Piece.CROSS : Piece.CIRCLE;
         this.notifyObservers();
-        
     }
 
     /**
@@ -184,31 +169,11 @@ public class ModelJeu implements IModelJeu, Observable {
         return currentPlayer;
     }
 
-    /**
-     * Trouve la première ligne vide dans une colonne spécifiée.
-     *
-     * @param col La colonne où rechercher la première ligne vide.
-     * @return L'index de la première ligne vide dans la colonne.
-     * @throws IllegalArgumentException Si la colonne est pleine.
-     */
-    public int trouverEmptyRow(int col) {
-        Piece[][] grid = this.getGrid();
-        for (int row = grid.length - 1; row >= 0; row--) {
-            if (grid[row][col] == Piece.EMPTY) {
-                return row;
-            }
-        }
-        throw new IllegalArgumentException("La colonne est pleine.");
-    }
-
-
     public Coup getCoupProposed() {
         return coupProposed;
     }
 
-
     public void setCoupProposed(Coup coupProposed) {
         this.coupProposed = coupProposed;
     }
-
 }
