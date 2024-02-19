@@ -19,7 +19,7 @@ public class CoupValidePuissance4 implements CoupValidStrategy {
     @Override
     public Coup verifierCoupValide(Piece[][] grid,int coup) throws Exception {
 
-        if (coup < 0 || coup >= grid[0].length  * grid.length)  {
+        if (coup < 0 || coup > grid[0].length  * grid.length)  {
             throw new Exception("Coup non valide : colonne hors limites");
         }
 
