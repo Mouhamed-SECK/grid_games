@@ -24,7 +24,6 @@ public interface IView {
     /**
      * Affiche le menu de choix du jeu et retourne le choix du joueur.
      *
-     * @return Le choix du joueur.
      */
     void afficherMenuChoixJeu();
 
@@ -33,11 +32,15 @@ public interface IView {
      */
     void afficherGrid();
 
-
-     public void subscribe(Observable o);
+    /**
+     * 
+     * @param o observable
+     */
+    public void subscribe(Observable o);
 
     /**
      * Affiche le message de fin de partie.
+     * @param status qui est le statut actuelle du jeu
      */
     void afficherGameOver(GameStatus status);
 
@@ -48,7 +51,7 @@ public interface IView {
 
     /**
      * Définit le contrôleur pour la vue.
-     * @param controller Le contrôleur à définir.
+     * @param IGmeController Le contrôleur à définir.
      */
     void setController(IGameController IGmeController);
 

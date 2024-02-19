@@ -25,7 +25,6 @@ public abstract class ModelJeu implements  IModelJeu, Observable {
      *
      * @param row  Le nombre de lignes dans la grille.
      * @param col  Le nombre de colonnes dans la grille.
-     * @param grid La configuration initiale de la grille.
      */
     public ModelJeu(int row, int col) {
         this.row = row;
@@ -169,11 +168,19 @@ public abstract class ModelJeu implements  IModelJeu, Observable {
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
-
+    /**
+     * Obtient le coup proposé actuellement par le joueur.
+     *
+     * @return Le coup proposé.
+     */
     public Coup getCoupProposed() {
         return coupProposed;
     }
-
+    /**
+     * Définit le coup proposé par le joueur.
+     *
+     * @param coupProposed Le coup à proposer.
+     */
     public void setCoupProposed(Coup coupProposed) {
         this.coupProposed = coupProposed;
     }

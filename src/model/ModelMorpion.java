@@ -14,7 +14,11 @@ public  class ModelMorpion extends ModelJeu {
     public ModelMorpion(int row, int col) {
         super(row, col);
     }
-
+    /**
+    * Détermine si le jeu est terminé en vérifiant la présence d'une ligne, colonne ou diagonale gagnante  ou si la grille est entièrement remplie.
+    * 
+    * @return GameStatus Retourne l'état actuel du jeu, soit PLAYER_1_WIN, PLAYER_2_WIN, DRAW, ou IN_PROGRESS.
+    */
     @Override
     public GameStatus isGameOver() {
         // Check for a winning line or a full board
@@ -32,7 +36,12 @@ public  class ModelMorpion extends ModelJeu {
         return GameStatus.IN_PROGRESS;
     }
     
-    
+    /**
+    * Vérifie si une ligne donnée contient une séquence gagnante de pièces identiques.
+    * 
+    * @param rowIndex L'indice de la ligne à vérifier.
+    * @return boolean Vrai si une ligne gagnante est trouvée, faux autrement.
+    */
     private boolean checkRow(int rowIndex) {
         Piece first = grid[rowIndex][0];
         if (first == Piece.EMPTY) return false;
@@ -43,7 +52,12 @@ public  class ModelMorpion extends ModelJeu {
         }
         return true;
     }
-    
+    /**
+    * Vérifie si une colonne donnée contient une séquence gagnante de pièces identiques.
+    * 
+    * @param colIndex L'indice de la colonne à vérifier.
+    * @return boolean Vrai si une colonne gagnante est trouvée, faux autrement.
+    */
     private boolean checkColumn(int colIndex) {
         Piece first = grid[0][colIndex];
         if (first == Piece.EMPTY) return false;
@@ -54,7 +68,11 @@ public  class ModelMorpion extends ModelJeu {
         }
         return true;
     }
-    
+    /**
+    * Vérifie les deux diagonales principales pour une séquence gagnante de pièces identiques.
+    * 
+    * @return boolean Vrai si une diagonale gagnante est trouvée, faux autrement.
+    */
     private boolean checkDiagonals() {
         Piece topLeft = grid[0][0];
         Piece topRight = grid[0][2];
@@ -68,7 +86,11 @@ public  class ModelMorpion extends ModelJeu {
         
         return diagonal1 || diagonal2;
     }
-    
+    /**
+    * Vérifie si la grille de jeu est entièrement remplie de pièces, indiquant qu'il n'y a plus de coups possibles.
+    * 
+    * @return boolean Vrai si la grille est complètement remplie, faux si des coups sont encore possibles.
+    */
     private boolean isGridFull() {
         for (Piece[] row : grid) {
             for (Piece piece : row) {

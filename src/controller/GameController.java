@@ -69,9 +69,7 @@ public class GameController implements IGameController {
      * Vérifie si un coup est valide en utilisant la stratégie spécifiée.
      *
      * @param grid La grille de jeu représentée par un tableau de pièces.
-     * @param row  La ligne où le coup est proposé.
-     * @param col  La colonne où le coup est proposé.
-     * @return true si le coup est valide, false sinon.
+     * @param coup le coup à jouer
      */
     public void verifierCoupValide (Piece[][] grid, int coup)  throws Exception{
         Coup  valideCoup = this.coupValidStrategy.verifierCoupValide(grid,  coup);

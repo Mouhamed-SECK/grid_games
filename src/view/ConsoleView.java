@@ -21,7 +21,6 @@ public class ConsoleView implements IView, Observer {
     /**
      * Constructeur de la classe ConsoleView.
      *
-     * @param controller Le contrôleur associé à la vue.
      */
     public ConsoleView() {
         this.scanner = new Scanner(System.in);

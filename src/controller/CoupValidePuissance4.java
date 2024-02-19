@@ -13,8 +13,7 @@ public class CoupValidePuissance4 implements CoupValidStrategy {
      * Vérifie si un coup est valide dans la grille du Puissance 4.
      *
      * @param grid La grille de jeu représentée par un tableau de pièces.
-     * @param col  La colonne où le coup est proposé.
-     * @param row  La ligne où le coup est proposé.
+     * @param coup le coup à jouer
      * @return true si le coup est valide, false sinon.
      */
     @Override

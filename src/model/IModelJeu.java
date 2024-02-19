@@ -4,104 +4,105 @@ import controller.IGameController;
 import controller.GameStatus;
 
 /**
- * Interface for the game manager model.
+ * Interface définissant le modèle de gestion de jeu. Elle spécifie les opérations essentielles
+ * que le modèle de jeu doit implémenter pour interagir avec le contrôleur et la vue dans l'architecture MVC.
  */
 public interface IModelJeu {
+
     /**
-     * Initialise la grille du jeu.
+     * Initialise la grille de jeu à son état de départ, généralement vide.
      */
     void initGrid();
 
     /**
-     * Vérifie si le jeu est terminé.
+     * Vérifie l'état actuel du jeu pour déterminer s'il est terminé et dans quel état.
      *
-     * @return l'état du jeu.
+     * @return L'état actuel du jeu sous forme de GameStatus.
      */
-    public GameStatus isGameOver();
-
+    GameStatus isGameOver();
 
     /**
-     * Effectue le mouvement d'un joueur.
-     *
-     * @param row La ligne du mouvement.
-     * @param col La colonne du mouvement.
+     * Exécute le coup d'un joueur en mettant à jour la grille du jeu en conséquence.
      */
     void jouerCoup();
 
     /**
-     * Permet de recuperer la grille 
+     * Fournit la grille de jeu actuelle.
+     *
+     * @return La grille actuelle du jeu sous forme d'un tableau bidimensionnel de pièces.
      */
-    Piece[][]  getGrid();
+    Piece[][] getGrid();
 
     /**
-     * Méthode pour changer le joueur en cours.
+     * Change le joueur actuel pour passer au joueur suivant.
      */
     void changeCurrentPlayer();
 
     /**
-     * Ajoute un observateur au modèle.
+     * Ajoute un observateur à la liste des observateurs du modèle.
      *
      * @param o L'observateur à ajouter.
      */
     void addObserver(Observer o);
 
     /**
-     * Supprime un observateur du modèle.
+     * Supprime un observateur de la liste des observateurs du modèle.
      *
      * @param o L'observateur à supprimer.
      */
     void deleteObserver(Observer o);
 
-     /**
-     * Définit le contrôleur associé à ce modèle.
+    /**
+     * Associe un contrôleur au modèle.
      *
-     * @param controller Le contrôleur à associer.
+     * @param controller Le contrôleur à associer au modèle.
      */
     void setController(IGameController controller);
 
-
-     /**
-     * Définit le joueur actif.
+    /**
+     * Définit le joueur actuellement actif dans le jeu.
      *
      * @param currentPlayer Le joueur actif à définir.
      */
-    public void setCurrentPlayer(Player currentPlayer);
+    void setCurrentPlayer(Player currentPlayer);
 
-
-
-     /**
-     * Récupère le joueur actif.
+    /**
+     * Récupère le joueur actuellement actif.
      *
      * @return Le joueur actif.
      */
-    public Player getCurrentPlayer();
-
-
-    /**
-     * Récupère le nombre de lignes dans la grille.
-     *
-     * @return Le nombre de lignes.
-     */
-    public int getRow();
-
+    Player getCurrentPlayer();
 
     /**
-     * Récupère le nombre de colonnes dans la grille.
+     * Obtient le nombre de lignes de la grille de jeu.
      *
-     * @return Le nombre de colonnes .
+     * @return Le nombre de lignes dans la grille.
      */
-    public int getCol();
+    int getRow();
 
-
-     /**
-     * Notifie tous les observateurs en appelant leur méthode update.
+    /**
+     * Obtient le nombre de colonnes de la grille de jeu.
+     *
+     * @return Le nombre de colonnes dans la grille.
      */
-    public void notifyObservers();
+    int getCol();
 
+    /**
+     * Notifie tous les observateurs d'un changement d'état en appelant leur méthode de mise à jour.
+     */
+    void notifyObservers();
 
-    public Coup getCoupProposed();
+    /**
+     * Obtient le coup proposé actuellement par le joueur.
+     *
+     * @return Le coup proposé.
+     */
+    Coup getCoupProposed();
 
-
-    public void setCoupProposed(Coup coupProposed) ;
-
+    /**
+     * Définit le coup proposé par le joueur.
+     *
+     * @param coupProposed Le coup à proposer.
+     */
+    void setCoupProposed(Coup coupProposed);
 }
